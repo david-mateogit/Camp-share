@@ -1,0 +1,118 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+/* Thumbnail styles */
+.thumbnail img {
+  width: 100%;
+}
+
+.thumbnail .caption-full {
+  padding: 9px;
+}
+
+.delete-form {
+  display: inline-block;
+}
+
+.map-container {
+  display: block;
+  position: relative;
+  height: 400px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 400px;
+}
+
+.geocoder {
+  position: absolute;
+  z-index: 1;
+  width: 50%;
+  left: 5%;
+  top: 20px;
+}
+
+.mapboxgl-ctrl-geocoder {
+  min-width: 130px !important;
+}
+.mapboxgl-ctrl-geocoder--input {
+  width: 100%;
+}
+.comments {
+  margin-bottom: 15px;
+}
+
+.comment-text {
+  width: 70% !important;
+  margin: 0;
+}
+
+.comment-buttons {
+  margin-top: -10px;
+}
+
+/* Flexbox grid fix */
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-fields {
+  margin-bottom: -1rem;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.landing-search {
+  padding: 0 10px;
+}
+.btn-top {
+  margin-top: 2rem;
+}
+
+.page-nav {
+  padding-bottom: 10px;
+}
+.footer {
+  position: absolute;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #efefef;
+  bottom: 0;
+}

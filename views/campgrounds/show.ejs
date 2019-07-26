@@ -1,0 +1,96 @@
+<% include ../partials/header %>
+
+
+  <div class='row'>
+    <div class='col-md-3'>
+      <p class='h2 font-weight-light'>Map</p>
+      <div class='map-container mb-4'>
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
+        <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css' type='text/css' />
+
+        <div id='map'></div>
+        <div id='geocoder' class='geocoder'></div>
+
+        <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic2lsZW51cyIsImEiOiJjanloYXRkcGcwOXZiM2VyejMwb3pranZnIn0.DDb0f7rHvUdUMtp7zc8D0Q';
+        var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-79.4512, 43.6568],
+        zoom: 13
+        });
+
+        var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        marker: {
+                color: 'orange',
+                anchor: 'left',
+                draggable: true
+            },
+        mapboxgl: mapboxgl
+        });
+
+        document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+        </script>
+
+
+      </div>
+    </div>
+    <div class=col-md-9>
+        <div class='card mb-3'>
+          <img class='card-img-top' src='<%= campground.image %> '/>
+          <div class='card-body'>
+            <h4 class='float-right'>$<%= campground.price %>/night</h4>
+            <a><h4 class="card-title"><%= campground.name %> </h4></a>
+            <p class="card-text">
+              <em>Submitted by: <a href='/users/<%= campground.author.id %>'><%= campground.author.username %></a>, <%= moment(campground.createdAt).fromNow() %></em>
+            </p>
+            <hr>
+            <p class="card-text"> <%= campground.description %> </p>
+            <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+            <a class='btn btn-warning' href='/campgrounds/<%= campground._id %>/edit'>Edit</a>
+            <form class='delete-form' action='/campgrounds/<%= campground._id %>?_method=DELETE' method='POST'>
+                <button class='btn btn-danger'>Delete</button>
+            </form>
+            <% }%>
+          </div>
+        </div>
+        <div class='card'>
+          <div class='card-body'>
+            <div class='text-right'>
+              <a class='btn btn-success' href='/campgrounds/<%= campground._id %>/comments/new'>Leave a Review</a>
+            </div>
+            <hr>
+            <div class='row'>
+              <% campground.comments.forEach(function(comment) {%>
+                <div class='col-md-12 mb-2 comments'>
+                  <div class='card'>
+                    <div class='card-body'>
+                      <span class="float-right"><%= moment(comment.createdAt).fromNow() %></span>
+                      <p class='card-title'>
+                        <%= comment.author.username %>
+                      </p>
+                      <% if(currentUser && comment.author.id.equals               (currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                        <div class='float-right comment-buttons'>
+                          <a class='btn btn-sm btn-warning' href='/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit'>Edit</a>
+                          <form class='delete-form' action='/campgrounds/<%=        campground._id   %>/comments/<%= comment._id %>?        _method=DELETE' method='POST'>
+                            <button class='btn btn-sm btn-danger'>Delete</button>
+                          </form>
+                        </div>
+                      <% }%>
+                      <p class='card-text comment-text'>
+                        <%= comment.text %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% include ../partials/footer %>
+
