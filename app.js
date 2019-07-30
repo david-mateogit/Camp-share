@@ -18,10 +18,7 @@ const indexRoutes = require('./routes/index');
 
 //Mongoose SETUP
 mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
-// mongoose.connect(
-//   'mongodb+srv://dataBaseApp:8VKGfMSzYQDyzjQ@cluster0-i3tyr.mongodb.net/yelp_camp?retryWrites=true&w=majority',
-//   { useNewUrlParser: true }
-// );
+
 mongoose.set('useCreateIndex', true);
 
 //Express use
