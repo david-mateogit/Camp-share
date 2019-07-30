@@ -17,7 +17,8 @@ const campgroundRoutes = require('./routes/campgrounds');
 const indexRoutes = require('./routes/index');
 
 //Mongoose SETUP
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+const url = process.env.DATABASEURL || 'mongodb://localhost/yelp_camp';
+mongoose.connect(url, { useNewUrlParser: true });
 
 mongoose.set('useCreateIndex', true);
 
